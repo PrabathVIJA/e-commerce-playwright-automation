@@ -1,6 +1,13 @@
-import { test } from "@playwright/test";
+import { test, expect } from "@playwright/test";
+import { PageManager } from "../managers/PageManager";
 
-test("go there", async ({ page }) => {
+test.beforeEach("launch the page", async ({ page }) => {
   await page.goto("https://askomdch.com/");
-  await page.getByText("Store").first().click();
+});
+
+test("validate title", async ({ page }) => {
+  const pm = new PageManager(page);
+  const home = pm.homePage();
+  const title = await home.getTitle();
+  expect(title).toEqual("AskOmDch – Become a Selenium automation expert!");
 });
