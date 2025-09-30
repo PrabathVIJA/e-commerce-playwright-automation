@@ -36,7 +36,15 @@ export default defineConfig({
   projects: [
     {
       name: "chrome",
-      use: { ...devices["Desktop Chrome"] },
+      use: {
+        browserName: "chromium",
+        channel: "chrome", // ensures real Chrome, not just Chromium
+        headless: false,
+        viewport: null, // let the window decide size
+        launchOptions: {
+          args: ["--start-maximized"], // start browser maximized
+        },
+      },
     },
 
     /* Test against mobile viewports. */
