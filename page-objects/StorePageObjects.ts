@@ -23,6 +23,11 @@ export class StorePageObjects {
   async selectOrderbyDropdownOption(optionText: string) {
     const dropdown = this.page.locator(".orderby");
     await dropdown.selectOption({ label: optionText });
+    const selectedValue = await dropdown
+      .locator("option:checked")
+      .textContent();
+
+    return selectedValue;
   }
   async loopOrderbyDropdownOptions() {
     const options = await this.getOrderbyDropdownOptions();
@@ -38,10 +43,14 @@ export class StorePageObjects {
 
   async selectCategoryDropdownOption(optionText: string) {
     const dropDown = this.page.locator("#product_cat");
-    console.log(optionText);
 
     await dropDown.scrollIntoViewIfNeeded();
     await dropDown.selectOption({ label: optionText });
+    const selectedOption = await dropDown
+      .locator("option:checked")
+      .textContent();
+
+    return selectedOption;
   }
 
   async loopCategoryDropdown() {
@@ -50,5 +59,29 @@ export class StorePageObjects {
     for (const option of options) {
       await this.selectCategoryDropdownOption(option);
     }
+  }
+
+  async searchProductField(item: string) {
+    const inputField = this.page.locator("#woocommerce-product-search-field-0");
+
+    await inputField.fill("blue");
+  }
+
+  async clickSearch() {
+    await this.page.getByRole("button", { name: "Search" }).click();
+  }
+  async addToCart() {
+    await this.page
+      .getByRole("link", {
+        name: "Add “Blue Shoes” to your cart",
+      })
+      .click();
+  }
+
+  async placeOrder() {
+    await this.searchProductField("Blue");
+    await this.clickSearch();
+    await this.addToCart();
+    await this.page.waitForTimeout(6000);
   }
 }
