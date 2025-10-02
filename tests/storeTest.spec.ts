@@ -4,6 +4,7 @@ import { HomePageObjects } from "../page-objects/HomePageObjects";
 import { StorePageObjects } from "../page-objects/StorePageObjects";
 import { OrderBy } from "../enums/OrderBy";
 import { describe } from "node:test";
+import orderData from "../data/orderData.json";
 
 test.describe("store Page tests", () => {
   let pageManager: PageManager;
@@ -55,6 +56,21 @@ describe("order flow", () => {
   });
 
   test("positive order flow", async () => {
-    await storePage.placeOrder();
+    const data = orderData.order1;
+    const confirmationText = await storePage.placeOrder(
+      data.product,
+      data.firstName,
+      data.lastName,
+      data.company,
+      data.address,
+      data.addressTwo,
+      data.townOrCity,
+      data.postalCode,
+      data.email
+    );
+
+    expect(confirmationText).toContain(
+      "Thank you. Your order has been received"
+    );
   });
 });

@@ -1,0 +1,13 @@
+{
+  "order1": {
+    "product": "Blue",
+    "firstName": "Prabath",
+    "lastName": "Kiran",
+    "company": "Ignatio",
+    "address": "second street, san diego 2/2",
+    "addressTwo": "upstate town",
+    "townOrCity": "San Diego",
+    "postalCode": "91911",
+    "email": "PK@gmail.com"
+  }
+}
