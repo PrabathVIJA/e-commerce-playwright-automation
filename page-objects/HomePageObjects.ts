@@ -6,7 +6,7 @@ export class HomePageObjects {
   }
 
   async goto() {
-    await this.page.goto("https://askomdch.com/");
+    await this.page.goto("/");
   }
 
   async getTitle() {
