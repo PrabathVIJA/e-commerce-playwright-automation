@@ -41,9 +41,7 @@ test.describe("store Page tests", () => {
   });
 });
 
-//describe for order flow
-
-describe("order flow", () => {
+test.describe("order flow with COD or DIRECT Payment", () => {
   let pageManager: PageManager;
   let homePage: HomePageObjects;
   let storePage: StorePageObjects;
@@ -55,22 +53,22 @@ describe("order flow", () => {
     await storePage.clickStore();
   });
 
-  test("positive order flow", async () => {
-    const data = orderData.order1;
-    const confirmationText = await storePage.placeOrder(
-      data.product,
-      data.firstName,
-      data.lastName,
-      data.company,
-      data.address,
-      data.addressTwo,
-      data.townOrCity,
-      data.postalCode,
-      data.email
-    );
+  for (const data of orderData.orders) {
+    test(`place order using ${data.payment} payment type`, async () => {
+      const modeOfPayment = await storePage.placeOrder(
+        data.product,
+        data.firstName,
+        data.lastName,
+        data.company,
+        data.address,
+        data.addressTwo,
+        data.townOrCity,
+        data.postalCode,
+        data.email,
+        data.payment as "direct" | "cod"
+      );
 
-    expect(confirmationText).toContain(
-      "Thank you. Your order has been received"
-    );
-  });
+      expect(modeOfPayment).toContain(data.expectedText);
+    });
+  }
 });

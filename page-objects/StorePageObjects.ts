@@ -112,11 +112,15 @@ export class StorePageObjects {
   async placeOrderBtn() {
     await this.page.locator("#place_order").click();
   }
-  async getOrderConfirmation() {
-    return await this.page
-      .locator(".woocommerce-thankyou-order-received")
-      .textContent();
+  async cashOnDeliveryBtn() {
+    await this.page.locator("#payment_method_cod").click();
   }
+
+  async getModeOfPaymentText() {
+    return await this.page.locator(".method strong").textContent();
+  }
+
+  // method for selecting an item, using checkout in view cart and make payment
   async placeOrder(
     product: string,
     firstName: string,
@@ -126,7 +130,8 @@ export class StorePageObjects {
     addressTwo: string,
     townOrCity: string,
     postalCode: string,
-    email: string
+    email: string,
+    payment: "direct" | "cod" = "direct"
   ) {
     await this.searchProductField(product);
     await this.clickSearch();
@@ -143,8 +148,15 @@ export class StorePageObjects {
     await this.enterTownOrCity(townOrCity);
     await this.enterPostalCode(postalCode);
     await this.enterEmail(email);
+    if (payment === "cod") {
+      await this.cashOnDeliveryBtn();
+    }
     await this.placeOrderBtn();
 
-    return await this.getOrderConfirmation();
+    const text = await this.getModeOfPaymentText();
+    if (!text) {
+      throw new Error("Payment mode text not found!");
+    }
+    return text.trim();
   }
 }
