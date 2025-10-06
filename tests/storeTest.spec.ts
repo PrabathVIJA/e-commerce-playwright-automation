@@ -5,6 +5,7 @@ import { StorePageObjects } from "../page-objects/StorePageObjects";
 import { OrderBy } from "../enums/OrderBy";
 import { describe } from "node:test";
 import orderData from "../data/orderData.json";
+import { CartPageObjects } from "../page-objects/CartPageObject";
 
 test.describe("store Page tests", () => {
   let pageManager: PageManager;
@@ -41,7 +42,7 @@ test.describe("store Page tests", () => {
   });
 });
 
-test.describe("order flow with COD or DIRECT Payment", () => {
+test.describe("order flow with COD or DIRECT Payment with Direct checkout", () => {
   let pageManager: PageManager;
   let homePage: HomePageObjects;
   let storePage: StorePageObjects;
@@ -55,8 +56,9 @@ test.describe("order flow with COD or DIRECT Payment", () => {
 
   for (const data of orderData.orders) {
     test(`place order using ${data.payment} payment type`, async () => {
-      const modeOfPayment = await storePage.placeOrder(
-        data.product,
+      await storePage.searchItemAndAddToCart(data.product);
+      await storePage.hoverOverCartAndCheckOut();
+      const modeOfPayment = await storePage.fillCheckoutDetails(
         data.firstName,
         data.lastName,
         data.company,
@@ -71,4 +73,25 @@ test.describe("order flow with COD or DIRECT Payment", () => {
       expect(modeOfPayment).toContain(data.expectedText);
     });
   }
+});
+
+test.describe("View cart and update quantity flow", () => {
+  let pm: PageManager;
+  let homePage: HomePageObjects;
+  let storePage: StorePageObjects;
+  let cartPage: CartPageObjects;
+  test.beforeEach("launch the page", async ({ page }) => {
+    pm = new PageManager(page);
+    homePage = pm.homePage();
+    await homePage.goto();
+    storePage = pm.storePage();
+    await storePage.clickStore();
+    cartPage = pm.cartPage();
+  });
+
+  test("update items in view cart and order", async () => {
+    await storePage.searchItemAndAddToCart("Blue");
+    await storePage.hoverOverCartAndClickCart();
+    await cartPage.quantityField(3);
+  });
 });

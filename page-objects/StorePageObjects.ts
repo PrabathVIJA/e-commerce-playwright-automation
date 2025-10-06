@@ -83,6 +83,10 @@ export class StorePageObjects {
   async clickCheckout() {
     await this.page.getByRole("link", { name: "Checkout" }).click();
   }
+  async clickViewCart() {
+    await this.page.getByRole("link", { name: "View cart" }).first().click();
+  }
+
   async enterFirstName(firstName: string) {
     await this.page.locator("#billing_first_name").fill(firstName);
   }
@@ -130,6 +134,11 @@ export class StorePageObjects {
     await this.hoverOverShoppingCart();
     await this.clickCheckout();
   }
+  //for hovering over view cart and click view cart
+  async hoverOverCartAndClickCart() {
+    await this.hoverOverShoppingCart();
+    await this.clickViewCart();
+  }
   //for filling input fields and returning text indicating mode of payment
   async fillCheckoutDetails(
     firstName: string,
@@ -160,33 +169,5 @@ export class StorePageObjects {
       throw new Error("Payment mode text not found!");
     }
     return text.trim();
-  }
-
-  // method for selecting an item, using checkout in view cart and make payment
-  async placeOrder(
-    product: string,
-    firstName: string,
-    lastName: string,
-    company: string,
-    address: string,
-    addressTwo: string,
-    townOrCity: string,
-    postalCode: string,
-    email: string,
-    payment: "direct" | "cod" = "direct"
-  ) {
-    await this.searchItemAndAddToCart(product);
-    await this.hoverOverCartAndCheckOut();
-    return await this.fillCheckoutDetails(
-      firstName,
-      lastName,
-      company,
-      address,
-      addressTwo,
-      townOrCity,
-      postalCode,
-      email,
-      payment
-    );
   }
 }
