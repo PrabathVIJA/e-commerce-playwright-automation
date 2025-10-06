@@ -70,6 +70,8 @@ test.describe("order flow with COD or DIRECT Payment with Direct checkout", () =
         data.payment as "direct" | "cod"
       );
 
+      console.log("hi");
+
       expect(modeOfPayment).toContain(data.expectedText);
     });
   }
