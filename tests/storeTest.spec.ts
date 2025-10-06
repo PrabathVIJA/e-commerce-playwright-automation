@@ -68,8 +68,6 @@ test.describe("order flow with COD or DIRECT Payment", () => {
         data.payment as "direct" | "cod"
       );
 
-      console.log("hi");
-
       expect(modeOfPayment).toContain(data.expectedText);
     });
   }
