@@ -60,7 +60,7 @@ export class CheckoutPageObjects {
     await this.enterTownOrCity(townOrCity);
     await this.enterPostalCode(postalCode);
     await this.enterEmail(email);
-    await this.page.waitForTimeout(6000);
+
     if (payment === "cod") {
       await this.cashOnDeliveryBtn();
     }

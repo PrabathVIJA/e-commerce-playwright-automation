@@ -100,6 +100,9 @@ test.describe("View cart and update quantity flow", () => {
   test("update items in view cart and order", async () => {
     await storePage.searchItemAndAddToCart("Blue");
     await storePage.hoverOverCartAndClickCart();
-    await cartPage.quantityField(3);
+    await cartPage.changeQuantityAndUpdate(3);
+    await cartPage.getPriceBasedOnQuantity(3);
+    const text = await cartPage.getTotalGeneratedBySystem();
+    console.log(text);
   });
 });
