@@ -3,9 +3,11 @@ import { PageManager } from "../managers/PageManager";
 import { HomePageObjects } from "../page-objects/HomePageObjects";
 import { StorePageObjects } from "../page-objects/StorePageObjects";
 import { OrderBy } from "../enums/OrderBy";
-import { describe } from "node:test";
+
 import orderData from "../data/orderData.json";
 import { CartPageObjects } from "../page-objects/CartPageObject";
+
+import { CheckoutPageObjects } from "../page-objects/CheckoutPageObjects";
 
 test.describe("store Page tests", () => {
   let pageManager: PageManager;
@@ -46,19 +48,21 @@ test.describe("order flow with COD or DIRECT Payment with Direct checkout", () =
   let pageManager: PageManager;
   let homePage: HomePageObjects;
   let storePage: StorePageObjects;
+  let checkOutPage: CheckoutPageObjects;
   test.beforeEach("launch the page", async ({ page }) => {
     pageManager = new PageManager(page);
     homePage = pageManager.homePage();
     await homePage.goto();
     storePage = pageManager.storePage();
     await storePage.clickStore();
+    checkOutPage = pageManager.checkOutPage();
   });
 
   for (const data of orderData.orders) {
     test(`place order using ${data.payment} payment type`, async () => {
       await storePage.searchItemAndAddToCart(data.product);
       await storePage.hoverOverCartAndCheckOut();
-      const modeOfPayment = await storePage.fillCheckoutDetails(
+      const modeOfPayment = await checkOutPage.fillCheckoutDetails(
         data.firstName,
         data.lastName,
         data.company,
@@ -82,6 +86,7 @@ test.describe("View cart and update quantity flow", () => {
   let homePage: HomePageObjects;
   let storePage: StorePageObjects;
   let cartPage: CartPageObjects;
+  let checkOutPage: CheckoutPageObjects;
   test.beforeEach("launch the page", async ({ page }) => {
     pm = new PageManager(page);
     homePage = pm.homePage();
@@ -89,6 +94,7 @@ test.describe("View cart and update quantity flow", () => {
     storePage = pm.storePage();
     await storePage.clickStore();
     cartPage = pm.cartPage();
+    checkOutPage = pm.checkOutPage();
   });
 
   test("update items in view cart and order", async () => {
