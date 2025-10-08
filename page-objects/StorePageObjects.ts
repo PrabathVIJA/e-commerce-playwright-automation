@@ -64,7 +64,31 @@ export class StorePageObjects {
   async searchProductField(item: string) {
     const inputField = this.page.locator("#woocommerce-product-search-field-0");
 
-    await inputField.fill("blue");
+    await inputField.fill(item);
+  }
+
+  //add all items to cart
+  async allItemsToCart() {
+    const allItemsOnPage = this.page.locator(
+      "div.ast-woocommerce-container a.add_to_cart_button"
+    );
+    const items = await allItemsOnPage.elementHandles();
+    for (const item of items) {
+      await item.click();
+      await this.page.waitForTimeout(500);
+    }
+  }
+
+  async getCountInCart() {
+    const totalNoOfItemsinCart = await this.page
+      .locator("div#ast-desktop-header .count")
+      .textContent();
+
+    return totalNoOfItemsinCart?.trim();
+  }
+
+  async goToNextPage() {
+    await this.page.locator("a.next").click();
   }
 
   async clickSearch() {

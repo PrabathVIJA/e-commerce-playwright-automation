@@ -1,11 +1,12 @@
 import { Page } from "@playwright/test";
+import { expect } from "@playwright/test";
 export class CartPageObjects {
   readonly page: Page;
   constructor(page: Page) {
     this.page = page;
   }
 
-  async quantityField(quantity: number) {
+  async updateQuantityField(quantity: number) {
     await this.page
       .locator(".quantity")
       .locator("[class='input-text qty text']")
@@ -23,21 +24,22 @@ export class CartPageObjects {
   async getPriceBasedOnQuantity(quantity: number) {
     const price = await this.getPrice();
     const totalPrice = price * quantity;
-    console.log(totalPrice);
+
     return totalPrice;
   }
 
   async updateCart() {
     const updateButton = this.page.getByRole("button", { name: "Update cart" });
-    await updateButton.click();
+    const isDisabled = await updateButton.getAttribute("aria-disabled");
+
+    if (isDisabled !== "true") {
+      await updateButton.click();
+    } else {
+      await updateButton.click({ force: true });
+    }
   }
 
-  async changeQuantityAndUpdate(quantity: number) {
-    await this.quantityField(quantity);
-    await this.updateCart();
-  }
-
-  async removeOverLay() {
+  async waitForOverlayToDisappear() {
     await this.page
       .locator(".blockOverlay")
       .nth(0)
@@ -45,10 +47,15 @@ export class CartPageObjects {
   }
 
   async getTotalGeneratedBySystem() {
-    await this.removeOverLay();
+    await this.waitForOverlayToDisappear();
     const totalLocator = this.page.locator(".cart_totals .amount").first();
-    totalLocator.waitFor({ state: "visible" });
+    const updatedText = await this.getPriceBasedOnQuantity(3);
     const totalPrice = await totalLocator.textContent();
+
     return totalPrice ? parseFloat(totalPrice.replace("$", "")) : 0;
+  }
+
+  async proceedToCheckOut() {
+    await this.page.locator(".wc-proceed-to-checkout").click();
   }
 }

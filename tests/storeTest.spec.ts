@@ -74,8 +74,6 @@ test.describe("order flow with COD or DIRECT Payment with Direct checkout", () =
         data.payment as "direct" | "cod"
       );
 
-      console.log("hi");
-
       expect(modeOfPayment).toContain(data.expectedText);
     });
   }
@@ -97,12 +95,36 @@ test.describe("View cart and update quantity flow", () => {
     checkOutPage = pm.checkOutPage();
   });
 
-  test("update items in view cart and order", async () => {
-    await storePage.searchItemAndAddToCart("Blue");
+  test("updates cart quantity and navigates to checkout", async () => {
+    const quantity = 3;
+    const data = orderData.orders[0];
+    await storePage.searchItemAndAddToCart(data.product);
     await storePage.hoverOverCartAndClickCart();
-    await cartPage.changeQuantityAndUpdate(3);
-    await cartPage.getPriceBasedOnQuantity(3);
-    const text = await cartPage.getTotalGeneratedBySystem();
-    console.log(text);
+    await cartPage.updateQuantityField(quantity);
+    await cartPage.updateCart();
+    await cartPage.waitForOverlayToDisappear();
+    await cartPage.proceedToCheckOut();
+    const modeOfPayment = await checkOutPage.fillCheckoutDetails(
+      data.firstName,
+      data.lastName,
+      data.company,
+      data.address,
+      data.addressTwo,
+      data.townOrCity,
+      data.postalCode,
+      data.email,
+      data.payment as "direct" | "cod"
+    );
+
+    expect(modeOfPayment).toContain(data.expectedText);
+  });
+
+  test("select All items on Both Pages and checkout", async () => {
+    await storePage.allItemsToCart();
+    await storePage.goToNextPage();
+    await storePage.allItemsToCart();
+    await storePage.hoverOverCartAndCheckOut();
+    const totalInCart = await storePage.getCountInCart();
+    console.log(totalInCart);
   });
 });
