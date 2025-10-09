@@ -120,11 +120,25 @@ test.describe("View cart and update quantity flow", () => {
   });
 
   test("select All items on Both Pages and checkout", async () => {
+    const data = orderData.orders[0];
+    const totalCartCount = 13;
     await storePage.allItemsToCart();
     await storePage.goToNextPage();
     await storePage.allItemsToCart();
     await storePage.hoverOverCartAndCheckOut();
-    const totalInCart = await storePage.getCountInCart();
-    console.log(totalInCart);
+
+    await storePage.waitForCartCount(totalCartCount);
+
+    await checkOutPage.fillCheckoutDetails(
+      data.firstName,
+      data.lastName,
+      data.company,
+      data.address,
+      data.addressTwo,
+      data.townOrCity,
+      data.postalCode,
+      data.email,
+      data.payment as "direct" | "cod"
+    );
   });
 });

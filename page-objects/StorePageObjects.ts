@@ -1,4 +1,4 @@
-import { Page } from "@playwright/test";
+import { expect, Page } from "@playwright/test";
 export class StorePageObjects {
   readonly page: Page;
   constructor(page: Page) {
@@ -61,6 +61,11 @@ export class StorePageObjects {
     }
   }
 
+  //loop over country dropdown options
+  async loopOverCountryDropdown() {
+    await this.page.locator("#billing_country");
+  }
+
   async searchProductField(item: string) {
     const inputField = this.page.locator("#woocommerce-product-search-field-0");
 
@@ -69,22 +74,39 @@ export class StorePageObjects {
 
   //add all items to cart
   async allItemsToCart() {
+    // const allItemsOnPage = this.page.locator(
+    //   "div.ast-woocommerce-container a.add_to_cart_button"
+    // );
+    // const items = await allItemsOnPage.elementHandles();
+    // for (const item of items) {
+    //   await item.click();
+    //   await this.page.waitForSelector(
+    //     "div.ast-woocommerce-container a.added_to_cart.wc-forward",
+    //     {
+    //       state: "visible",
+    //       timeout: 7000
+    //     }
+    //   );
+    // }
     const allItemsOnPage = this.page.locator(
       "div.ast-woocommerce-container a.add_to_cart_button"
     );
-    const items = await allItemsOnPage.elementHandles();
-    for (const item of items) {
+    const count = await allItemsOnPage.count();
+
+    for (let i = 0; i < count; i++) {
+      const item = allItemsOnPage.nth(i);
       await item.click();
-      await this.page.waitForTimeout(500);
+
+      // wait for the sibling "View cart" link
+      const viewCartLink = item.locator(":scope + a.added_to_cart.wc-forward");
+      await viewCartLink.waitFor({ state: "visible", timeout: 7000 });
     }
   }
 
-  async getCountInCart() {
-    const totalNoOfItemsinCart = await this.page
-      .locator("div#ast-desktop-header .count")
-      .textContent();
-
-    return totalNoOfItemsinCart?.trim();
+  async waitForCartCount(count: number) {
+    const cartCount = this.page.locator("div#ast-desktop-header .count");
+    await expect(cartCount).toHaveText(count.toString());
+    const totalCount = await cartCount.textContent();
   }
 
   async goToNextPage() {
