@@ -4,6 +4,29 @@ export class CheckoutPageObjects {
   constructor(page: Page) {
     this.page = page;
   }
+  //-->for user login
+  async clickHereToLoginBtn() {
+    await this.page.getByRole("link", { name: "Click here to login" }).click();
+  }
+
+  async enterUsernameOrEmail(value: string) {
+    const inputfield = this.page.getByLabel("Username or email ");
+    await inputfield.click();
+    await this.page.keyboard.type(value, { delay: 50 });
+  }
+  async enterPassword(value: string) {
+    const passwordField = this.page.getByRole("textbox", { name: "password" });
+    await passwordField.click();
+    await this.page.keyboard.type(value, { delay: 50 });
+  }
+  async clickRemembermeRadioBtn() {
+    await this.page.getByLabel("Remember me").click();
+  }
+  async clickLoginBtn() {
+    await this.page.locator(".woocommerce-form-login__submit").click();
+    await this.page.waitForTimeout(6000);
+  }
+  //
   async enterFirstName(firstName: string) {
     await this.page.locator("#billing_first_name").fill(firstName);
   }
@@ -13,6 +36,30 @@ export class CheckoutPageObjects {
   async enterCompanyName(company: string) {
     await this.page.locator("#billing_company").fill(company);
   }
+  //loop over country dropdown options -> will come back to this later
+  async loopOverCountryDropdown() {
+    const countrySelectionArrow = await this.page.locator(
+      "#billing_country_field .woocommerce-input-wrapper .select2-selection__arrow"
+    );
+    await countrySelectionArrow.click();
+    const countryDropdown = this.page.locator("#select2-billing_state-results");
+
+    const countryOptions = countryDropdown.locator("li");
+
+    const options = await countryOptions.allTextContents();
+
+    console.log(options);
+
+    for (const option of options) {
+      console.log(option);
+
+      await countryDropdown.selectOption({ label: option.trim() });
+      await countrySelectionArrow.click();
+
+      await this.page.waitForTimeout(500);
+    }
+  }
+
   async enterStreetAddress(address: string) {
     await this.page
       .getByRole("textbox", { name: "Street address" })
@@ -70,6 +117,7 @@ export class CheckoutPageObjects {
     if (!text) {
       throw new Error("Payment mode text not found!");
     }
+    await this.page.waitForTimeout(5000);
     return text.trim();
   }
 }

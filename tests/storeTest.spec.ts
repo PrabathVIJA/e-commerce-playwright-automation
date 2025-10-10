@@ -13,6 +13,7 @@ test.describe("store Page tests", () => {
   let pageManager: PageManager;
   let homePage: HomePageObjects;
   let storePage: StorePageObjects;
+  let checkOutPage: CheckoutPageObjects;
   test.beforeEach("launch the page", async ({ page }) => {
     pageManager = new PageManager(page);
     homePage = pageManager.homePage();
@@ -129,6 +130,28 @@ test.describe("View cart and update quantity flow", () => {
 
     await storePage.waitForCartCount(totalCartCount);
 
+    await checkOutPage.fillCheckoutDetails(
+      data.firstName,
+      data.lastName,
+      data.company,
+      data.address,
+      data.addressTwo,
+      data.townOrCity,
+      data.postalCode,
+      data.email,
+      data.payment as "direct" | "cod"
+    );
+  });
+
+  test("Login with valid credentials in check out page and make an order", async () => {
+    const data = orderData.orders[0];
+    await storePage.searchItemAndAddToCart(data.product);
+    await storePage.hoverOverCartAndCheckOut();
+    await checkOutPage.clickHereToLoginBtn();
+    await checkOutPage.enterUsernameOrEmail("kiran");
+    await checkOutPage.enterPassword("kiran1993");
+
+    await checkOutPage.clickLoginBtn();
     await checkOutPage.fillCheckoutDetails(
       data.firstName,
       data.lastName,

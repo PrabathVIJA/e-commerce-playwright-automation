@@ -61,11 +61,6 @@ export class StorePageObjects {
     }
   }
 
-  //loop over country dropdown options
-  async loopOverCountryDropdown() {
-    await this.page.locator("#billing_country");
-  }
-
   async searchProductField(item: string) {
     const inputField = this.page.locator("#woocommerce-product-search-field-0");
 
