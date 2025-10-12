@@ -42,7 +42,7 @@ export default defineConfig({
       use: {
         browserName: "chromium",
         channel: "chrome", // ensures real Chrome, not just Chromium
-        headless: false,
+        headless: !!process.env.CI,
         viewport: null, // let the window decide size
         launchOptions: {
           args: ["--start-maximized"], // start browser maximized
