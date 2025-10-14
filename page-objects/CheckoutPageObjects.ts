@@ -10,6 +10,8 @@ export class CheckoutPageObjects {
   }
 
   async enterUsernameOrEmail(value: string) {
+    console.log(value);
+
     const inputfield = this.page.getByLabel("Username or email ");
     await inputfield.click();
     await this.page.keyboard.type(value, { delay: 50 });
@@ -87,6 +89,11 @@ export class CheckoutPageObjects {
   async getModeOfPaymentText() {
     return await this.page.locator(".method strong").textContent();
   }
+  async orderConfirmationText() {
+    return await this.page
+      .locator("p.woocommerce-thankyou-order-received")
+      .textContent();
+  }
   //for filling input fields and returning text indicating mode of payment
   async fillCheckoutDetails(
     firstName: string,
@@ -117,7 +124,7 @@ export class CheckoutPageObjects {
     if (!text) {
       throw new Error("Payment mode text not found!");
     }
-    await this.page.waitForTimeout(5000);
+
     return text.trim();
   }
 }

@@ -15,6 +15,7 @@ export class StorePageObjects {
   async getTitle() {
     return this.page.title();
   }
+
   async getOrderbyDropdownOptions() {
     const dropdown = this.page.locator(".orderby");
     return dropdown.locator("option").allTextContents();
@@ -132,6 +133,14 @@ export class StorePageObjects {
     await this.searchProductField(product);
     await this.clickSearch();
     await this.addToCart();
+  }
+  async dynamicAddToCart(productName: string) {
+    const addToCart = this.page.locator(
+      `[aria-label="Add “${productName}” to your cart"]`
+    );
+    await addToCart.waitFor({ state: "visible" });
+    await addToCart.scrollIntoViewIfNeeded();
+    await addToCart.click();
   }
   //for hovering over view cart and click checkout
   async hoverOverCartAndCheckOut() {

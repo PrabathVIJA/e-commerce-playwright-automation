@@ -6,6 +6,7 @@ import { OrderBy } from "../enums/OrderBy";
 
 import orderData from "../data/orderData.json";
 import { CartPageObjects } from "../page-objects/CartPageObject";
+import productData from "../data/products.json";
 
 import { CheckoutPageObjects } from "../page-objects/CheckoutPageObjects";
 
@@ -164,4 +165,27 @@ test.describe("View cart and update quantity flow", () => {
       data.payment as "direct" | "cod"
     );
   });
+  for (const [index, product] of productData.products.entries())
+    test(`should add a product to the cart dynamically based on product name, the current product is ${product}`, async () => {
+      const data = orderData.orders[0];
+      if (index >= 8) {
+        await storePage.goToNextPage();
+      }
+      await storePage.dynamicAddToCart(product);
+      await storePage.hoverOverCartAndCheckOut();
+
+      await checkOutPage.fillCheckoutDetails(
+        data.firstName,
+        data.lastName,
+        data.company,
+        data.address,
+        data.addressTwo,
+        data.townOrCity,
+        data.postalCode,
+        data.email,
+        data.payment as "direct" | "cod"
+      );
+      const confirmationText = await checkOutPage.orderConfirmationText();
+      expect(confirmationText).toBe("Thank you. Your order has been received.");
+    });
 });
