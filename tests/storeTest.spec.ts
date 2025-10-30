@@ -98,7 +98,6 @@ test.describe("View cart and update quantity flow", () => {
   });
 
   test("updates cart quantity and navigates to checkout", async () => {
-    test.setTimeout(12 * 60 * 1000);
     const quantity = 3;
     const data = orderData.orders[0];
     await storePage.searchItemAndAddToCart(data.product);
