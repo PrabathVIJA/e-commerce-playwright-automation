@@ -12,7 +12,7 @@ export class StorePageObjects {
       .nth(0)
       .click();
   }
-  async getTitle() {
+  async getTitle(): Promise<string> {
     return this.page.title();
   }
 

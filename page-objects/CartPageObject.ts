@@ -5,8 +5,7 @@ export class CartPageObjects {
   constructor(page: Page) {
     this.page = page;
   }
-
-  async updateQuantityField(quantity: number) {
+  async updateQuantityField(quantity: number): Promise<void> {
     await this.page
       .locator(".quantity")
       .locator("[class='input-text qty text']")
