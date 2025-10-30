@@ -145,8 +145,6 @@ test.describe("View cart and update quantity flow", () => {
   });
 
   test("Login with valid credentials in check out page and make an order", async () => {
-    console.log("hi");
-
     const data = orderData.orders[0];
     await storePage.searchItemAndAddToCart(data.product);
     await storePage.hoverOverCartAndCheckOut();
