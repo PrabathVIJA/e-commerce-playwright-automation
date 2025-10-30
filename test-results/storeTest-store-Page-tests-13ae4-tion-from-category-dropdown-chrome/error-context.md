@@ -1,0 +1,413 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - link "Skip to content" [ref=e2] [cursor=pointer]:
+    - /url: "#content"
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - generic [ref=e9]:
+        - link "AskOmDch" [ref=e15] [cursor=pointer]:
+          - /url: https://askomdch.com/
+        - generic [ref=e16]:
+          - navigation "Site Navigation" [ref=e20]:
+            - list [ref=e22]:
+              - listitem [ref=e23]:
+                - link "Home" [ref=e24] [cursor=pointer]:
+                  - /url: https://askomdch.com/
+              - listitem [ref=e25]:
+                - link "Store" [ref=e26] [cursor=pointer]:
+                  - /url: https://askomdch.com/store/
+              - listitem [ref=e27]:
+                - link "Men" [ref=e28] [cursor=pointer]:
+                  - /url: https://askomdch.com/product-category/men/
+              - listitem [ref=e29]:
+                - link "Women" [ref=e30] [cursor=pointer]:
+                  - /url: https://askomdch.com/product-category/women/
+              - listitem [ref=e31]:
+                - link "Accessories" [ref=e32] [cursor=pointer]:
+                  - /url: https://askomdch.com/product-category/accessories/
+              - listitem [ref=e33]:
+                - link "Account" [ref=e34] [cursor=pointer]:
+                  - /url: https://askomdch.com/account/
+              - listitem [ref=e35]:
+                - link "About" [ref=e36] [cursor=pointer]:
+                  - /url: https://askomdch.com/about/
+              - listitem [ref=e37]:
+                - link "Contact Us" [ref=e38] [cursor=pointer]:
+                  - /url: https://askomdch.com/contact-us/
+          - link "0" [ref=e42] [cursor=pointer]:
+            - /url: https://askomdch.com/cart/
+            - generic [ref=e44] [cursor=pointer]: "0"
+    - generic [ref=e46]:
+      - generic [ref=e48]:
+        - search [ref=e50]:
+          - generic [ref=e51]: "Search for:"
+          - searchbox "Search for:" [ref=e52]
+          - button "Search" [ref=e53] [cursor=pointer]
+        - generic [ref=e54]:
+          - heading "Our Best Sellers" [level=2] [ref=e55]
+          - list [ref=e56]:
+            - listitem [ref=e57]:
+              - link "Faint Blue Jeans" [ref=e58] [cursor=pointer]:
+                - /url: https://askomdch.com/product/faint-blue-jeans/
+                - generic [ref=e59] [cursor=pointer]: Faint Blue Jeans
+              - generic [ref=e60]:
+                - text: sssss
+                - generic:
+                  - text: SSSSS Rated
+                  - strong [ref=e61]: "0"
+                  - text: out of 5
+              - deletion [ref=e62]:
+                - generic [ref=e64]:
+                  - generic [ref=e65]: $
+                  - text: "100.00"
+              - insertion [ref=e66]:
+                - generic [ref=e68]:
+                  - generic [ref=e69]: $
+                  - text: "86.00"
+            - listitem [ref=e70]:
+              - link "Blue Denim Shorts" [ref=e71] [cursor=pointer]:
+                - /url: https://askomdch.com/product/blue-denim-shorts/
+                - generic [ref=e72] [cursor=pointer]: Blue Denim Shorts
+              - generic [ref=e73]:
+                - text: sssss
+                - generic:
+                  - text: SSSSS Rated
+                  - strong [ref=e74]: "0"
+                  - text: out of 5
+              - deletion [ref=e75]:
+                - generic [ref=e77]:
+                  - generic [ref=e78]: $
+                  - text: "45.00"
+              - insertion [ref=e79]:
+                - generic [ref=e81]:
+                  - generic [ref=e82]: $
+                  - text: "35.00"
+            - listitem [ref=e83]:
+              - link "Basic Blue Jeans" [ref=e84] [cursor=pointer]:
+                - /url: https://askomdch.com/product/basic-blue-jeans/
+                - generic [ref=e85] [cursor=pointer]: Basic Blue Jeans
+              - generic [ref=e86]:
+                - text: sssss
+                - generic:
+                  - text: SSSSS Rated
+                  - strong [ref=e87]: "0"
+                  - text: out of 5
+              - deletion [ref=e88]:
+                - generic [ref=e90]:
+                  - generic [ref=e91]: $
+                  - text: "34.00"
+              - insertion [ref=e92]:
+                - generic [ref=e94]:
+                  - generic [ref=e95]: $
+                  - text: "30.00"
+        - generic [ref=e96]:
+          - heading "Browse By Categories" [level=2] [ref=e97]
+          - combobox [ref=e98]:
+            - option "Select a category" [selected]
+            - option "Accessories (3)"
+            - option "Men (7)"
+            - option "Men’s Jeans (4)"
+            - option "Men’s Shirts (1)"
+            - option "Men’s Shoes (1)"
+            - option "Purses And Handbags (1)"
+            - option "Women (7)"
+            - option "Women’s Jeans (2)"
+            - option "Women’s Shirts (1)"
+            - option "Women’s Shoes (1)"
+        - generic [ref=e99]:
+          - heading "Filter by price" [level=2] [ref=e100]
+          - generic [ref=e107]:
+            - generic [ref=e108]: Min price
+            - generic [ref=e109]: Max price
+            - button "Filter" [ref=e110] [cursor=pointer]
+            - generic [ref=e111]:
+              - text: "Price:"
+              - generic [ref=e112]: $10
+              - text: —
+              - generic [ref=e113]: $150
+      - main [ref=e115]:
+        - generic [ref=e116]:
+          - navigation [ref=e117]:
+            - link "Home" [ref=e118] [cursor=pointer]:
+              - /url: https://askomdch.com
+            - text: / Store
+          - heading "Store" [level=1] [ref=e120]
+          - paragraph [ref=e121]: Showing 1–8 of 13 results
+          - combobox "Shop order" [ref=e123]:
+            - option "Default sorting" [selected]
+            - option "Sort by popularity"
+            - option "Sort by average rating"
+            - option "Sort by latest"
+            - 'option "Sort by price: low to high"'
+            - 'option "Sort by price: high to low"'
+          - list [ref=e124]:
+            - listitem [ref=e125]:
+              - generic [ref=e126]:
+                - generic [ref=e127]: Sale!
+                - link [ref=e128] [cursor=pointer]:
+                  - /url: https://askomdch.com/product/anchor-bracelet/
+              - generic [ref=e129]:
+                - link "Anchor Bracelet" [ref=e130] [cursor=pointer]:
+                  - /url: https://askomdch.com/product/anchor-bracelet/
+                  - heading "Anchor Bracelet" [level=2] [ref=e131] [cursor=pointer]
+                - generic [ref=e132]: Accessories
+                - generic [ref=e133]:
+                  - deletion [ref=e134]:
+                    - generic [ref=e136]:
+                      - generic [ref=e137]: $
+                      - text: "12.00"
+                  - insertion [ref=e138]:
+                    - generic [ref=e140]:
+                      - generic [ref=e141]: $
+                      - text: "10.00"
+                - generic [ref=e142]:
+                  - text: sssss
+                  - generic:
+                    - text: SSSSS Rated
+                    - strong: "0"
+                    - text: out of 5
+                - link "Add “Anchor Bracelet” to your cart" [ref=e143] [cursor=pointer]:
+                  - /url: "?add-to-cart=1198"
+                  - text: Add to cart
+            - listitem [ref=e144]:
+              - generic [ref=e145]:
+                - generic [ref=e146]: Sale!
+                - link [ref=e147] [cursor=pointer]:
+                  - /url: https://askomdch.com/product/basic-blue-jeans/
+              - generic [ref=e148]:
+                - link "Basic Blue Jeans" [ref=e149] [cursor=pointer]:
+                  - /url: https://askomdch.com/product/basic-blue-jeans/
+                  - heading "Basic Blue Jeans" [level=2] [ref=e150] [cursor=pointer]
+                - generic [ref=e151]: Men
+                - generic [ref=e152]:
+                  - deletion [ref=e153]:
+                    - generic [ref=e155]:
+                      - generic [ref=e156]: $
+                      - text: "34.00"
+                  - insertion [ref=e157]:
+                    - generic [ref=e159]:
+                      - generic [ref=e160]: $
+                      - text: "30.00"
+                - generic [ref=e161]:
+                  - text: sssss
+                  - generic:
+                    - text: SSSSS Rated
+                    - strong: "0"
+                    - text: out of 5
+                - link "Add “Basic Blue Jeans” to your cart" [ref=e162] [cursor=pointer]:
+                  - /url: "?add-to-cart=1205"
+                  - text: Add to cart
+            - listitem [ref=e163]:
+              - link [ref=e165] [cursor=pointer]:
+                - /url: https://askomdch.com/product/black-over-the-shoulder-handbag/
+              - generic [ref=e166]:
+                - link "Black Over-the-shoulder Handbag" [ref=e167] [cursor=pointer]:
+                  - /url: https://askomdch.com/product/black-over-the-shoulder-handbag/
+                  - heading "Black Over-the-shoulder Handbag" [level=2] [ref=e168] [cursor=pointer]
+                - generic [ref=e169]: Accessories
+                - generic [ref=e172]:
+                  - generic [ref=e173]: $
+                  - text: "75.00"
+                - generic [ref=e174]:
+                  - text: sssss
+                  - generic:
+                    - text: SSSSS Rated
+                    - strong: "0"
+                    - text: out of 5
+                - link "Add “Black Over-the-shoulder Handbag” to your cart" [ref=e175] [cursor=pointer]:
+                  - /url: "?add-to-cart=1193"
+                  - text: Add to cart
+            - listitem [ref=e176]:
+              - generic [ref=e177]:
+                - generic [ref=e178]: Sale!
+                - link [ref=e179] [cursor=pointer]:
+                  - /url: https://askomdch.com/product/blue-denim-shorts/
+              - generic [ref=e180]:
+                - link "Blue Denim Shorts" [ref=e181] [cursor=pointer]:
+                  - /url: https://askomdch.com/product/blue-denim-shorts/
+                  - heading "Blue Denim Shorts" [level=2] [ref=e182] [cursor=pointer]
+                - generic [ref=e183]: Women
+                - generic [ref=e184]:
+                  - deletion [ref=e185]:
+                    - generic [ref=e187]:
+                      - generic [ref=e188]: $
+                      - text: "45.00"
+                  - insertion [ref=e189]:
+                    - generic [ref=e191]:
+                      - generic [ref=e192]: $
+                      - text: "35.00"
+                - generic [ref=e193]:
+                  - text: sssss
+                  - generic:
+                    - text: SSSSS Rated
+                    - strong: "0"
+                    - text: out of 5
+                - link "Add “Blue Denim Shorts” to your cart" [ref=e194] [cursor=pointer]:
+                  - /url: "?add-to-cart=1206"
+                  - text: Add to cart
+            - listitem [ref=e195]:
+              - link [ref=e197] [cursor=pointer]:
+                - /url: https://askomdch.com/product/blue-shoes/
+              - generic [ref=e198]:
+                - link "Blue Shoes" [ref=e199] [cursor=pointer]:
+                  - /url: https://askomdch.com/product/blue-shoes/
+                  - heading "Blue Shoes" [level=2] [ref=e200] [cursor=pointer]
+                - generic [ref=e201]: Men
+                - generic [ref=e204]:
+                  - generic [ref=e205]: $
+                  - text: "45.00"
+                - generic [ref=e206]:
+                  - text: sssss
+                  - generic:
+                    - text: SSSSS Rated
+                    - strong: "0"
+                    - text: out of 5
+                - link "Add “Blue Shoes” to your cart" [ref=e207] [cursor=pointer]:
+                  - /url: "?add-to-cart=1215"
+                  - text: Add to cart
+            - listitem [ref=e208]:
+              - link [ref=e210] [cursor=pointer]:
+                - /url: https://askomdch.com/product/blue-tshirt/
+              - generic [ref=e211]:
+                - link "Blue Tshirt" [ref=e212] [cursor=pointer]:
+                  - /url: https://askomdch.com/product/blue-tshirt/
+                  - heading "Blue Tshirt" [level=2] [ref=e213] [cursor=pointer]
+                - generic [ref=e214]: Men's Shirts
+                - generic [ref=e217]:
+                  - generic [ref=e218]: $
+                  - text: "34.00"
+                - generic [ref=e219]:
+                  - text: sssss
+                  - generic:
+                    - text: SSSSS Rated
+                    - strong: "0"
+                    - text: out of 5
+                - link "Add “Blue Tshirt” to your cart" [ref=e220] [cursor=pointer]:
+                  - /url: "?add-to-cart=1196"
+                  - text: Add to cart
+            - listitem [ref=e221]:
+              - link [ref=e223] [cursor=pointer]:
+                - /url: https://askomdch.com/product/boho-bangle-bracelet/
+              - generic [ref=e224]:
+                - link "Boho Bangle Bracelet" [ref=e225] [cursor=pointer]:
+                  - /url: https://askomdch.com/product/boho-bangle-bracelet/
+                  - heading "Boho Bangle Bracelet" [level=2] [ref=e226] [cursor=pointer]
+                - generic [ref=e227]: Accessories
+                - generic [ref=e230]:
+                  - generic [ref=e231]: $
+                  - text: "25.00"
+                - generic [ref=e232]:
+                  - text: sssss
+                  - generic:
+                    - text: SSSSS Rated
+                    - strong: "0"
+                    - text: out of 5
+                - link "Add “Boho Bangle Bracelet” to your cart" [ref=e233] [cursor=pointer]:
+                  - /url: "?add-to-cart=1199"
+                  - text: Add to cart
+            - listitem [ref=e234]:
+              - link [ref=e236] [cursor=pointer]:
+                - /url: https://askomdch.com/product/dark-brown-jeans/
+              - generic [ref=e237]:
+                - link "Dark Brown Jeans" [ref=e238] [cursor=pointer]:
+                  - /url: https://askomdch.com/product/dark-brown-jeans/
+                  - heading "Dark Brown Jeans" [level=2] [ref=e239] [cursor=pointer]
+                - generic [ref=e240]: Men
+                - generic [ref=e243]:
+                  - generic [ref=e244]: $
+                  - text: "145.00"
+                - generic [ref=e245]:
+                  - text: sssss
+                  - generic:
+                    - text: SSSSS Rated
+                    - strong: "0"
+                    - text: out of 5
+                - link "Add “Dark Brown Jeans” to your cart" [ref=e246] [cursor=pointer]:
+                  - /url: "?add-to-cart=1211"
+                  - text: Add to cart
+          - navigation [ref=e247]:
+            - list [ref=e248]:
+              - listitem [ref=e249]:
+                - generic [ref=e250]: "1"
+              - listitem [ref=e251]:
+                - link "2" [ref=e252] [cursor=pointer]:
+                  - /url: https://askomdch.com/store/page/2/
+              - listitem [ref=e253]:
+                - link "→" [ref=e254] [cursor=pointer]:
+                  - /url: https://askomdch.com/store/page/2/
+    - contentinfo [ref=e255]:
+      - generic [ref=e258]:
+        - complementary "Footer Widget 1" [ref=e260]:
+          - generic [ref=e262]:
+            - heading "Quick Links" [level=2] [ref=e263]
+            - navigation "Quick Links" [ref=e264]:
+              - list [ref=e265]:
+                - listitem [ref=e266]:
+                  - link "Home" [ref=e267] [cursor=pointer]:
+                    - /url: https://askomdch.com/
+                - listitem [ref=e268]:
+                  - link "About" [ref=e269] [cursor=pointer]:
+                    - /url: https://askomdch.com/about/
+                - listitem [ref=e270]:
+                  - link "My Account" [ref=e271] [cursor=pointer]:
+                    - /url: https://askomdch.com/account/
+                - listitem [ref=e272]:
+                  - link "Cart" [ref=e273] [cursor=pointer]:
+                    - /url: https://askomdch.com/cart/
+                - listitem [ref=e274]:
+                  - link "Contact Us" [ref=e275] [cursor=pointer]:
+                    - /url: https://askomdch.com/contact-us/
+        - complementary "Footer Widget 2" [ref=e277]:
+          - generic [ref=e279]:
+            - heading "For Her" [level=2] [ref=e280]
+            - navigation "For Her" [ref=e281]:
+              - list [ref=e282]:
+                - listitem [ref=e283]:
+                  - link "Women" [ref=e284] [cursor=pointer]:
+                    - /url: https://askomdch.com/product-category/women/
+                - listitem [ref=e285]:
+                  - link "Women’s Jeans" [ref=e286] [cursor=pointer]:
+                    - /url: https://askomdch.com/product-category/womens-jeans/
+                - listitem [ref=e287]:
+                  - link "Women’s Shirts" [ref=e288] [cursor=pointer]:
+                    - /url: https://askomdch.com/product-category/womens-shirts/
+                - listitem [ref=e289]:
+                  - link "Women’s Shoes" [ref=e290] [cursor=pointer]:
+                    - /url: https://askomdch.com/product-category/womens-shoes/
+                - listitem [ref=e291]:
+                  - link "Accessories" [ref=e292] [cursor=pointer]:
+                    - /url: https://askomdch.com/product-category/accessories/
+        - complementary "Footer Widget 3" [ref=e294]:
+          - generic [ref=e296]:
+            - heading "For Him" [level=2] [ref=e297]
+            - navigation "For Him" [ref=e298]:
+              - list [ref=e299]:
+                - listitem [ref=e300]:
+                  - link "Men" [ref=e301] [cursor=pointer]:
+                    - /url: https://askomdch.com/product-category/men/
+                - listitem [ref=e302]:
+                  - link "Men’s Jeans" [ref=e303] [cursor=pointer]:
+                    - /url: https://askomdch.com/product-category/mens-jeans/
+                - listitem [ref=e304]:
+                  - link "Men’s Shirts" [ref=e305] [cursor=pointer]:
+                    - /url: https://askomdch.com/product-category/mens-shirts/
+                - listitem [ref=e306]:
+                  - link "Men’s Shoes" [ref=e307] [cursor=pointer]:
+                    - /url: https://askomdch.com/product-category/mens-shoes/
+                - listitem [ref=e308]:
+                  - link "Accessories" [ref=e309] [cursor=pointer]:
+                    - /url: https://askomdch.com/product-category/accessories/
+        - complementary "Footer Widget 4" [ref=e311]:
+          - generic [ref=e313]:
+            - heading "AOD on Mobile" [level=2] [ref=e314]
+            - paragraph [ref=e316]:
+              - link [ref=e317] [cursor=pointer]:
+                - /url: https://www.apple.com/in/app-store/
+              - link [ref=e318] [cursor=pointer]:
+                - /url: https://play.google.com/store
+      - generic [ref=e321]:
+        - paragraph [ref=e325]: Copyright © 2025 AskOmDch
+        - paragraph [ref=e330]: Powered by AskOmDch
+```
