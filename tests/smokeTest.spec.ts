@@ -11,6 +11,8 @@ test.describe("smoketests", () => {
   let checkOutPage: CheckoutPageObjects;
 
   test("smoke flow", async ({ page }) => {
+    console.log("hii");
+
     pageManager = new PageManager(page);
     homePage = pageManager.homePage();
     await homePage.goto();
