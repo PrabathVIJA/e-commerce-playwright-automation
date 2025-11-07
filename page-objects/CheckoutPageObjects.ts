@@ -94,6 +94,9 @@ export class CheckoutPageObjects {
       .locator("p.woocommerce-thankyou-order-received")
       .textContent();
   }
+  async checkOutPageUrl() {
+    return this.page.url();
+  }
   //for filling input fields and returning text indicating mode of payment
   async fillCheckoutDetails(
     firstName: string,

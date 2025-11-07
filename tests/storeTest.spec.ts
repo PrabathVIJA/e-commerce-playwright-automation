@@ -188,4 +188,35 @@ test.describe("View cart and update quantity flow", () => {
       const confirmationText = await checkOutPage.orderConfirmationText();
       expect(confirmationText).toBe("Thank you. Your order has been received.");
     });
+
+  test("positive flow through selection option from category dropdown", async () => {
+    const {
+      product,
+      firstName,
+      lastName,
+      company,
+      address,
+      addressTwo,
+      townOrCity,
+      postalCode,
+      email,
+      payment,
+      expectedText,
+    } = orderData.orders[0];
+    const item = productData.products[1];
+    await storePage.categoryDropdown("men");
+    await storePage.dynamicAddToCart(item);
+    await storePage.hoverOverCartAndCheckOut();
+    const modeOfPayment = await checkOutPage.fillCheckoutDetails(
+      firstName,
+      lastName,
+      company,
+      address,
+      addressTwo,
+      townOrCity,
+      postalCode,
+      email
+    );
+    expect(modeOfPayment).toContain(expectedText);
+  });
 });

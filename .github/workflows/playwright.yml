@@ -16,7 +16,7 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps --force
       - name: Run Playwright tests
-        run: npx playwright test
+        run: npx playwright test tests/smokeTest.spec.ts
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:

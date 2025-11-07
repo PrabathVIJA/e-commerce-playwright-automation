@@ -129,6 +129,16 @@ export class StorePageObjects {
     await this.page.getByRole("link", { name: "View cart" }).first().click();
   }
 
+  async categoryDropdown(category: string) {
+    const dropDown = this.page.locator("#product_cat");
+
+    await dropDown.scrollIntoViewIfNeeded();
+
+    await dropDown.selectOption(category);
+
+    await expect(dropDown).toHaveValue(category);
+  }
+
   async searchItemAndAddToCart(product: string) {
     await this.searchProductField(product);
     await this.clickSearch();
