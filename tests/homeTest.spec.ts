@@ -10,6 +10,7 @@ test.describe("Home Page tests", () => {
     homePage = pageManager.homePage();
     await homePage.goto();
   });
+  console.log("hi");
 
   test("validate title", async ({ page }) => {
     const title = await homePage.getTitle();
