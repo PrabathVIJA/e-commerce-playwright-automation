@@ -9,6 +9,11 @@ import { CartPageObjects } from "../page-objects/CartPageObject";
 import productData from "../data/products.json";
 
 import { CheckoutPageObjects } from "../page-objects/CheckoutPageObjects";
+import { AccountPageObject } from "../page-objects/AccountPageObject";
+import fs from "fs";
+const userData = JSON.parse(
+  fs.readFileSync("./data/userCredentials.json", "utf-8")
+);
 
 test.describe("store Page tests", () => {
   let pageManager: PageManager;
@@ -87,6 +92,7 @@ test.describe("View cart and update quantity flow", () => {
   let storePage: StorePageObjects;
   let cartPage: CartPageObjects;
   let checkOutPage: CheckoutPageObjects;
+
   test.beforeEach("launch the page", async ({ page }) => {
     pm = new PageManager(page);
     homePage = pm.homePage();
@@ -218,5 +224,45 @@ test.describe("View cart and update quantity flow", () => {
       email
     );
     expect(modeOfPayment).toContain(expectedText);
+  });
+});
+
+test.describe("login from account page and make payment", async () => {
+  let pm: PageManager;
+  let homePage: HomePageObjects;
+  let storePage: StorePageObjects;
+  let cartPage: CartPageObjects;
+  let checkOutPage: CheckoutPageObjects;
+  let accountPage: AccountPageObject;
+  test.beforeEach("launching and going to accountpage", async ({ page }) => {
+    pm = new PageManager(page);
+    homePage = pm.homePage();
+    await homePage.goto();
+    storePage = pm.storePage();
+    accountPage = pm.accountPage();
+    cartPage = pm.cartPage();
+    checkOutPage = pm.checkOutPage();
+    accountPage.clickAccount();
+  });
+  test("login from account page and make an order", async () => {
+    const data = orderData.orders[0];
+    const username = userData.credentials[0].userName;
+    const password = userData.credentials[0].password;
+    await accountPage.validateUserlogin(username, password);
+    expect(await accountPage.getHelloText()).toContain("Hello");
+    await storePage.clickStore();
+    await storePage.searchItemAndAddToCart(data.product);
+    await storePage.hoverOverCartAndCheckOut();
+    await checkOutPage.fillCheckoutDetails(
+      data.firstName,
+      data.lastName,
+      data.company,
+      data.address,
+      data.addressTwo,
+      data.townOrCity,
+      data.postalCode,
+      data.email,
+      data.payment as "direct" | "cod"
+    );
   });
 });

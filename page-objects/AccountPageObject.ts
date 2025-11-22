@@ -1,5 +1,6 @@
 import { expect, Page } from "@playwright/test";
 import { BasePage } from "./BasePage";
+
 export class AccountPageObject extends BasePage {
   constructor(page: Page) {
     super(page);
@@ -17,14 +18,24 @@ export class AccountPageObject extends BasePage {
     expect(headingText).toBe("Account");
   }
   async userName(userName: string) {
-    return this.page.getByLabel("username").fill(userName);
+    await this.page.locator("#username").fill(userName);
   }
 
   async password(password: string) {
-    return this.page.getByLabel("password").fill(password);
+    await this.page.locator("#password").fill(password);
   }
   async loginBtn() {
     await this.page.getByRole("button", { name: "Log in" }).click();
+  }
+
+  async getHelloText() {
+    return this.page
+      .locator(".woocommerce-MyAccount-content p")
+      .nth(0)
+      .innerText();
+  }
+  async logOut() {
+    return this.page.getByRole("link", { name: "Log out" }).click();
   }
 
   async validateUserlogin(userName: string, password: string) {
