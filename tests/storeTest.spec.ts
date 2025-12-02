@@ -229,6 +229,37 @@ test.describe("View cart and update quantity flow", () => {
     );
     expect(modeOfPayment).toContain(expectedText);
   });
+
+  test("positive flow through selection option from Sort dropdown", async () => {
+    const {
+      product,
+      firstName,
+      lastName,
+      company,
+      address,
+      addressTwo,
+      townOrCity,
+      postalCode,
+      email,
+      payment,
+      expectedText,
+    } = orderData.orders[0];
+    const item = productData.products[1];
+    await ui.selectDropDownByValue(".orderby", "popularity");
+    await storePage.dynamicAddToCart(item);
+    await storePage.hoverOverCartAndCheckOut();
+    const modeOfPayment = await checkOutPage.fillCheckoutDetails(
+      firstName,
+      lastName,
+      company,
+      address,
+      addressTwo,
+      townOrCity,
+      postalCode,
+      email
+    );
+    expect(modeOfPayment).toContain(expectedText);
+  });
 });
 
 test.describe("login from account page and make payment", async () => {
