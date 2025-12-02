@@ -10,6 +10,7 @@ import productData from "../data/products.json";
 
 import { CheckoutPageObjects } from "../page-objects/CheckoutPageObjects";
 import { AccountPageObject } from "../page-objects/AccountPageObject";
+import { UIUtils } from "../helpers/uiUtils";
 import fs from "fs";
 const userData = JSON.parse(
   fs.readFileSync("./data/userCredentials.json", "utf-8")
@@ -92,8 +93,10 @@ test.describe("View cart and update quantity flow", () => {
   let storePage: StorePageObjects;
   let cartPage: CartPageObjects;
   let checkOutPage: CheckoutPageObjects;
+  let ui: UIUtils;
 
   test.beforeEach("launch the page", async ({ page }) => {
+    ui = new UIUtils(page);
     pm = new PageManager(page);
     homePage = pm.homePage();
     await homePage.goto();
@@ -210,7 +213,8 @@ test.describe("View cart and update quantity flow", () => {
       expectedText,
     } = orderData.orders[0];
     const item = productData.products[1];
-    await storePage.categoryDropdown("men");
+    // await storePage.categoryDropdown("men");
+    await ui.selectDropDownByValue("#product_cat", "men");
     await storePage.dynamicAddToCart(item);
     await storePage.hoverOverCartAndCheckOut();
     const modeOfPayment = await checkOutPage.fillCheckoutDetails(
