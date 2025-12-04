@@ -5,9 +5,12 @@ export class UIUtils {
     this.page = page;
   }
   async selectDropDownByValue(locator: string, option: string) {
-    await this.page.pause();
     const dropDown = this.page.locator(locator);
-    await dropDown.selectOption(option);
-    await expect(dropDown).toHaveValue(option);
+    try {
+      await dropDown.selectOption(option);
+      await expect(dropDown).toHaveValue(option);
+    } catch (e) {
+      throw new Error(`Failed to click ${option} from dropdown ${e}`);
+    }
   }
 }
