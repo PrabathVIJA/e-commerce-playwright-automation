@@ -231,7 +231,7 @@ test.describe("View cart and update quantity flow", () => {
     expect(modeOfPayment).toContain(expectedText);
   });
 
-  test("positive flow through selection option from Sort dropdown", async () => {
+  test("positive flow through selection option from Sort By dropdown", async () => {
     const {
       product,
       firstName,
