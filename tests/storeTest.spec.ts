@@ -13,6 +13,7 @@ import { AccountPageObject } from "../page-objects/AccountPageObject";
 import { UIUtils } from "../helpers/uiUtils";
 import { OrderByDropdownValues } from "../enums/OrderByDropdownValues";
 import fs from "fs";
+import { populateFakerFields } from "../helpers/dataHelpers";
 const userData = JSON.parse(
   fs.readFileSync("./data/userCredentials.json", "utf-8")
 );
@@ -58,6 +59,7 @@ test.describe("order flow with COD or DIRECT Payment with Direct checkout", () =
   let homePage: HomePageObjects;
   let storePage: StorePageObjects;
   let checkOutPage: CheckoutPageObjects;
+
   test.beforeEach("launch the page", async ({ page }) => {
     pageManager = new PageManager(page);
     homePage = pageManager.homePage();
@@ -67,8 +69,9 @@ test.describe("order flow with COD or DIRECT Payment with Direct checkout", () =
     checkOutPage = pageManager.checkOutPage();
   });
 
-  for (const data of orderData.orders) {
-    test(`place order using ${data.payment} payment type`, async () => {
+  for (const originalData of orderData.orders) {
+    test(`place order using ${originalData.payment} payment type`, async () => {
+      const data = populateFakerFields(originalData);
       await storePage.searchItemAndAddToCart(data.product);
       await storePage.hoverOverCartAndCheckOut();
       const modeOfPayment = await checkOutPage.fillCheckoutDetails(
