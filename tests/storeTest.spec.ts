@@ -112,7 +112,7 @@ test.describe("View cart and update quantity flow", () => {
 
   test("updates cart quantity and navigates to checkout", async () => {
     const quantity = 3;
-    const data = orderData.orders[0];
+    const data = populateFakerFields(orderData.orders[0]);
     await storePage.searchItemAndAddToCart(data.product);
     await storePage.hoverOverCartAndClickCart();
     await cartPage.updateQuantityField(quantity);
@@ -135,7 +135,7 @@ test.describe("View cart and update quantity flow", () => {
   });
 
   test("select All items on Both Pages and checkout", async () => {
-    const data = orderData.orders[0];
+    const data = populateFakerFields(orderData.orders[0]);
     const totalCartCount = 13;
     await storePage.allItemsToCart();
     await storePage.goToNextPage();
@@ -158,7 +158,7 @@ test.describe("View cart and update quantity flow", () => {
   });
 
   test("Login with valid credentials in check out page and make an order", async () => {
-    const data = orderData.orders[0];
+    const data = populateFakerFields(orderData.orders[0]);
     await storePage.searchItemAndAddToCart(data.product);
     await storePage.hoverOverCartAndCheckOut();
     await checkOutPage.clickHereToLoginBtn();
@@ -180,7 +180,7 @@ test.describe("View cart and update quantity flow", () => {
   });
   for (const [index, product] of productData.products.entries())
     test(`should add a product to the cart dynamically based on product name, the current product is ${product}`, async () => {
-      const data = orderData.orders[0];
+      const data = populateFakerFields(orderData.orders[0]);
       if (index >= 8) {
         await storePage.goToNextPage();
       }
@@ -215,7 +215,7 @@ test.describe("View cart and update quantity flow", () => {
       email,
       payment,
       expectedText,
-    } = orderData.orders[0];
+    } = populateFakerFields(orderData.orders[0]);
     const item = productData.products[1];
     // await storePage.categoryDropdown("men");
     await ui.selectDropDownByValue("#product_cat", "men");
@@ -247,7 +247,7 @@ test.describe("View cart and update quantity flow", () => {
       email,
       payment,
       expectedText,
-    } = orderData.orders[0];
+    } = populateFakerFields(orderData.orders[0]);
     const item = productData.products[1];
     await ui.selectDropDownByValue(
       ".orderby",
@@ -287,7 +287,7 @@ test.describe("login from account page and make payment", async () => {
     accountPage.clickAccount();
   });
   test("login from account page and make an order", async () => {
-    const data = orderData.orders[0];
+    const data = populateFakerFields(orderData.orders[0]);
     const username = userData.credentials[0].userName;
     const password = userData.credentials[0].password;
     await accountPage.validateUserlogin(username, password);
