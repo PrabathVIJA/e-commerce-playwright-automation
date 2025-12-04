@@ -11,6 +11,7 @@ import productData from "../data/products.json";
 import { CheckoutPageObjects } from "../page-objects/CheckoutPageObjects";
 import { AccountPageObject } from "../page-objects/AccountPageObject";
 import { UIUtils } from "../helpers/uiUtils";
+import { OrderByDropdownValues } from "../enums/OrderByDropdownValues";
 import fs from "fs";
 const userData = JSON.parse(
   fs.readFileSync("./data/userCredentials.json", "utf-8")
@@ -245,7 +246,10 @@ test.describe("View cart and update quantity flow", () => {
       expectedText,
     } = orderData.orders[0];
     const item = productData.products[1];
-    await ui.selectDropDownByValue(".orderby", "popularity");
+    await ui.selectDropDownByValue(
+      ".orderby",
+      OrderByDropdownValues.POPULARITY
+    );
     await storePage.dynamicAddToCart(item);
     await storePage.hoverOverCartAndCheckOut();
     const modeOfPayment = await checkOutPage.fillCheckoutDetails(
