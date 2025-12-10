@@ -1,22 +1,42 @@
 name: Playwright Tests
+
 on:
-  workflow_dispatch:
+  push: # ⬅️ Run on every push
+  workflow_dispatch: # Manual trigger
+
 jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v5
+
       - uses: actions/setup-node@v5
         with:
           node-version: 22
+
       - name: Install dependencies
         run: npm ci --force
+
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps --force
+
       - name: Run Playwright tests
         run: npx playwright test tests/smokeTest.spec.ts
-      - uses: actions/upload-artifact@v4
+
+      # ⬇️ Upload failure screenshots / videos / traces
+      - name: Upload Playwright Failure Artifacts
+        if: failure() # Upload only when tests fail
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-failures
+          path: test-results/ # Playwright stores failure artifacts here
+          retention-days: 30
+
+      # ⬇️ Upload HTML report
+      - name: Upload HTML Report
+        uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
           name: playwright-report
