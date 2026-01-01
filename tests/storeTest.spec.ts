@@ -290,6 +290,7 @@ test.describe("login from account page and make payment", async () => {
     const data = populateFakerFields(orderData.orders[0]);
     const username = userData.credentials[0].userName;
     const password = userData.credentials[0].password;
+
     await accountPage.validateUserlogin(username, password);
     expect(await accountPage.getHelloText()).toContain("Hello");
     await storePage.clickStore();
