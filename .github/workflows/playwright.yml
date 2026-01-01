@@ -25,7 +25,7 @@ jobs:
       - name: Run Playwright tests
         run: npx playwright test tests/smokeTest.spec.ts
 
-      # ⬇️ Upload failure screenshots / videos / traces
+      # ⬇️ Upload failure screenshots / videos / trace
       - name: Upload Playwright Failure Artifacts
         if: failure() # Upload only when tests fail
         uses: actions/upload-artifact@v4
