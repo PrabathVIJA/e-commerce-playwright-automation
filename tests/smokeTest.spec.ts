@@ -4,7 +4,7 @@ import { HomePageObjects } from "../page-objects/HomePageObjects";
 import { CheckoutPageObjects } from "../page-objects/CheckoutPageObjects";
 import { StorePageObjects } from "../page-objects/StorePageObjects";
 
-test.describe("smoketests", () => {
+test.describe("smoketests", { tag: "@smoke" }, () => {
   let pageManager: PageManager;
   let homePage: HomePageObjects;
   let storePage: StorePageObjects;
@@ -23,6 +23,6 @@ test.describe("smoketests", () => {
     await storePage.dynamicAddToCart("Blue Shoes");
     await storePage.hoverOverCartAndCheckOut();
     checkOutPage = pageManager.checkOutPage();
-    expect(page).toHaveURL("/checkout/");
+    expect(page).toHaveURL("https://askomdch.com/checkout/");
   });
 });

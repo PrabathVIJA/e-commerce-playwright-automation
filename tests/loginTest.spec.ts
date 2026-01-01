@@ -12,7 +12,8 @@ test.describe("Login test suite", async () => {
     await page.goto("https://askomdch.com/account/");
   });
   test("validate home Page url", async ({ page }) => {
-    const text = await account.getHelloText();
-    console.log(text);
+    expect.soft(await account.getHelloText()).toContain("Hello");
+
+    await account.logOut();
   });
 });
