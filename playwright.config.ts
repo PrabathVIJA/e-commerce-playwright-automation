@@ -37,7 +37,7 @@ export default defineConfig({
     trace: "retain-on-failure",
   },
 
-  /* Configure projects for major browsers */
+  /* Configure projects for browsers */
   projects: [
     {
       name: "chrome",
